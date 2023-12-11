@@ -1,4 +1,4 @@
-from grids_map.grids_map import GridsMap  
+from .grids_map import GridsMap  
 from node.pathfinding_node import PNode
 
 class GridsMap3D(GridsMap):

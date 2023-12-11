@@ -1,6 +1,6 @@
 from random import randint
 
-from map_generator.map_generator import MapGenerator
+from .map_generator import MapGenerator
 from grids_map.pathfing_grids_map3d import GridsMap3D  
 
 class BoxGeneratorforGrids3D(MapGenerator):

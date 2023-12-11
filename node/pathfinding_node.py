@@ -1,6 +1,6 @@
 from typing import Optional
 
-from node.node import Node  
+from .node import Node  
 
 
 class PNode(Node):
