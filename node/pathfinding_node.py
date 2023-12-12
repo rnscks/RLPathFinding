@@ -18,8 +18,15 @@ class PNode(Node):
         self.parent: Optional["PNode"] = None
         
         self.is_start_node: bool = False    
+        self.is_current_node: bool = False  
         self.is_end_node: bool = False
         
+
+    def get_index(self)-> tuple[int]:
+        return (self.i, self.j, self.k)
+    
+    def get_moving_index(self, index: tuple[int]) -> tuple[int]:
+        return (self.i + index[0], self.j + index[1], self.k + index[2])
         
     def __str__(self) -> str:
         return super().__str__(f"({self.i}, {self.j}, {self.k})")
@@ -28,9 +35,3 @@ class PNode(Node):
         bool_type: bool = self.i == other.i and self.j == other.j and self.k == other.k
         return super().__eq__(bool_type)
         
-    
-if __name__ == "__main__":
-    pnode = PNode(1,2,3)    
-    
-    print(pnode)
-    pass    

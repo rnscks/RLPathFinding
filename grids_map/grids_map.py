@@ -3,8 +3,6 @@ from abc import ABC, abstractmethod
 
 class GridsMap(ABC):
     
-    def override(method):
-        return method
 
     @abstractmethod
     def set_start_node(self, node: PNode):
@@ -28,6 +26,10 @@ class GridsMap(ABC):
     
     @abstractmethod
     def __getitem__(self, *args,  **kwargs) -> PNode:
+        pass
+    
+    @abstractmethod
+    def __len__(self) -> PNode:
         pass
     
 
