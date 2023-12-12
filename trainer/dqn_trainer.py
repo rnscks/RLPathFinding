@@ -5,7 +5,7 @@ from trainer.dqn_optimizer import DQNModelOptimizer
 from trainer.dqn_agent import DQNAgent  
 from trainer.dqn_replay_memory import DQNReplayMemory   
 
-class DQNGrids2D:   
+class DQNTrainer:   
     def __init__(self, epochs: int, batch_size: int) -> None:
         self.episodes = epochs
         self.batch_size = batch_size
