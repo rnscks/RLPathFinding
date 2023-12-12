@@ -19,7 +19,7 @@ class DQNTrainer:
     def train(self):
         train_loss_average_list = []
         for episode in range(self.episodes):
-            current_state = self.grids2d_env.reset()    
+            current_state = self.grids2d_env.get_reset()    
             network_input = current_state
             time_steps = 36
             for time_step in range(time_steps):
