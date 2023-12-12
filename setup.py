@@ -8,7 +8,7 @@ setup(
     description="path finding map generator and convertor",
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/yourusername/my_package",
+    url="https://github.com/rnscks/RL-Path-Finding.git",
     packages=find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
