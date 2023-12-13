@@ -17,7 +17,9 @@ class GridsMap2D(GridsMap):
         self.current_node.is_current_node = True    
         
         
-    def set_current_node(self, new_current_node: PNode) -> None:
+    def set_current_node(self, new_current_node: PNode) -> None:        
+        if (new_current_node.is_obstacle):
+            return  
         self.current_node.is_current_node = False
         new_current_node.is_current_node = True
         self.current_node = new_current_node 
@@ -44,6 +46,7 @@ class GridsMap2D(GridsMap):
     def __getitem__(self, index: tuple[int]) -> PNode:
         if (index[0] < 0 or index[0] >= self.max_len or index[1] < 0 or index[1] >= self.max_len):
             return self.current_node
+        
         return self.node_map[index[0]][index[1]]
     
     def __len__(self) -> PNode:

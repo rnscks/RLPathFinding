@@ -21,18 +21,17 @@ class DQNAgent:
         network_input = network_input.unsqueeze(0).unsqueeze(0) 
         sample_number = random.random()
         eps_threshold =  self.get_eplisontread(time_step)
-        
         if (sample_number > eps_threshold):
             with torch.no_grad():
-                optimalAction = torch.argmax(self.dqn_policy_network(network_input))
-                return torch.tensor([optimalAction], dtype=torch.float32)
+                optimal_action = torch.argmax(self.dqn_policy_network(network_input.view(-1, 1, 12, 12)))
+                return torch.tensor([optimal_action], dtype=torch.float32)
 
         return torch.tensor([random.randrange(8)], dtype=torch.float32)
     
 
-    def get_optimalAction(self, network_input):
+    def get_optimal_action(self, network_input):
         with torch.no_grad():
-            optimal_action = torch.argmax(self.dqn_target_network(network_input))
+            optimal_action = torch.argmax(self.dqn_target_network(network_input.view(-1, 1, 12, 12)))
             return torch.tensor([optimal_action], dtype=torch.float32)
 
     def get_eplisontread(self, time_step: int):

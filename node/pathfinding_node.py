@@ -34,4 +34,7 @@ class PNode(Node):
     def __eq__(self, other: 'PNode') -> bool:
         bool_type: bool = self.i == other.i and self.j == other.j and self.k == other.k
         return super().__eq__(bool_type)
+    
+    def __hash__(self) -> int:
+        return super().__hash__()   
         

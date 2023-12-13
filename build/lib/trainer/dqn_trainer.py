@@ -23,7 +23,7 @@ class DQNTrainer:
             network_input = current_state
             time_steps = 36
             for time_step in range(time_steps):
-                current_action = self.agent.get_training_action(network_input, time_steps + 1)
+                current_action = self.agent.get_training_action(network_input, time_step + 1)
                 
                 observation, reward = self.grids2d_env.step(current_action.item()) 
                 reward = torch.tensor([reward]).float()

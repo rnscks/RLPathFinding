@@ -25,21 +25,21 @@ class DQNModelOptimizer:
 
         sampling_memories = self.replay_memory.sample(batch_size)
         memories_batch: DQNMemoryBatch = DQNMemoryBatch.reconstruct_memories(sampling_memories,  batch_size)
-        
-        state_action_qvalue = self.agent.dqn_policy_network(memories_batch.sate_batch).gather(1, memories_batch.action_batch)
-        expected_qvalue = self.__predict_qvalue(batch_size, memories_batch)     
-
+        state_action_qvalue = self.agent.dqn_policy_network(memories_batch.sate_batch.view(-1, 1, 12, 12)).gather(1, memories_batch.action_batch.long())
+        expected_qvalue = self.__predict_qvalue(batch_size, memories_batch)    
         return self.__optimize_model(state_action_qvalue, expected_qvalue)
         
     def __predict_qvalue(self, batch_size: int, memories_batch: DQNMemoryBatch) -> torch.Tensor:
         predicted_qvalue = torch.zeros(batch_size).float()
         with torch.no_grad():
-            predicted_qvalue[memories_batch.non_final_mask] = self.agent.dqnTargetNetwork(memories_batch.non_final_next_state_batch).max(1)[0]
+            all_prediction_value= self.agent.dqn_target_network(memories_batch.non_final_next_state_batch.view(-1, 1, 12, 12)).max(1)[0]
+            predicted_qvalue[memories_batch.non_final_mask] = all_prediction_value[memories_batch.non_final_mask]
+            predicted_qvalue= predicted_qvalue.unsqueeze(1)  
         return predicted_qvalue * self.agent.dqn_hyperparameter.discount_factor + memories_batch.reward_batch
         
     def __optimize_model(self, state_action_qvalue, expected_qvalue):   
         lossFunction = nn.SmoothL1Loss()
-        loss = lossFunction(state_action_qvalue, expected_qvalue.unsqueeze(1))
+        loss = lossFunction(state_action_qvalue, expected_qvalue)
         self.optimizer.zero_grad()
         loss.backward()
         nn.utils.clip_grad_norm_(self.agent.dqn_policy_network.parameters(), 100)

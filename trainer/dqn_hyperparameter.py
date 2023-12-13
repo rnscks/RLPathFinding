@@ -1,5 +1,5 @@
 class DQNHyperparameters:
-    def __init__(self, learning_rate = 1e-4, netWork_updating_rate = 0.005,discount_factor = 0.99, batch_size = 128, epsilon_start = 0.9, eplison_decay = 1000, epsilon_end = 0.05):
+    def __init__(self, learning_rate = 1e-4, netWork_updating_rate = 0.0025, discount_factor = 0.99, batch_size = 128, epsilon_start = 0.9, eplison_decay = 5000, epsilon_end = 0.05):
         self.learning_rate = learning_rate
         self.netWork_updating_rate = netWork_updating_rate
         self.discount_factor = discount_factor

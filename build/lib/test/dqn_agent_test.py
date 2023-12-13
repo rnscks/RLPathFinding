@@ -17,7 +17,7 @@ class TestDQNAgent(unittest.TestCase):
 
     def test_get_optimalAction(self):
         network_input = FloatTensor(3, 1, 12, 12).fill_(1)
-        action = self.agent.get_optimalAction(network_input)
+        action = self.agent.get_optimal_action(network_input)
         self.assertIsInstance(action, torch.Tensor)
         self.assertEqual(action.shape, torch.Size([1]))
         self.assertTrue(action.item() >= 0 and action.item() < 8)

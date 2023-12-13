@@ -12,8 +12,9 @@ class Node(ABC):
     @abstractmethod
     def __eq__(self, bool_type: bool) -> bool:
         return bool_type
-
+    
+    @abstractmethod
     def __hash__(self) -> int:
-        return super().__hash__()
+        pass
 
 
